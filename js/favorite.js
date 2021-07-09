@@ -23,7 +23,7 @@ const inicializationImagesFavorites = () => {
   if (!imagesId.size) {
     document.getElementById(
       "favoritosContent"
-    ).innerHTML = `<p> No tienes imagenes favoritas </p>`;
+    ).innerHTML = `<p id='txtNotImgs'> No tienes imagenes favoritas </p>`;
   }
 
   if (imagesId.size) {
@@ -53,6 +53,7 @@ const saveLocalStorage = (idimg) => {
   imagesId.add(idimg);
   setDataStorage([...imagesId]);
   apiPixabay.loadImages([idimg]);
+  ui.showInfo(false, "txtNotImgs", "#favoritosContent");
 };
 
 const deleteFavorite = (idimg) => {
