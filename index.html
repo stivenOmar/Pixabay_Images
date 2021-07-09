@@ -50,8 +50,6 @@
         </form>
       </div>
 
-      <div class="notifyFav" id="notifyFav"></div>
-
       <div id="resultado" class="mt-10">
         <div
           id="infoNotification"
@@ -73,15 +71,20 @@
 
     <div
       id="favoritos"
-      class="inactiveMain container flex mx-auto flex-wrap mt-10"
+      class="inactiveMain flex mx-auto flex-wrap mt-5"
       style="width: 75%"
     >
-      <p>Aún no has añadido ninguna imagen a favoritos</p>
+      <div
+        id="favoritosContent"
+        class="container favCon flex mx-auto flex-wrap mt-10 text-center"
+      ></div>
     </div>
 
     <div class="footer">
       <p>Creado por Omar Calderon</p>
     </div>
+
+    <div class="notifyFav" id="notifyFav"></div>
 
     <script src="js/app.js" type="module"></script>
   </body>

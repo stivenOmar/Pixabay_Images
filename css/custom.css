@@ -28,6 +28,14 @@ body {
   display: none;
 }
 
+.favContent {
+  display: flex;
+}
+
+.favCon {
+  margin-bottom: 100px;
+}
+
 .cardImg {
   box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset,
     rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
@@ -92,7 +100,8 @@ body {
   cursor: pointer;
 }
 
-.star {
+.star,
+.circle {
   font-size: 30px;
   color: #888576d9;
   cursor: pointer;
@@ -104,6 +113,10 @@ body {
 
 .star:hover {
   color: #db8823;
+}
+
+.circle:hover {
+  color: #bb1e09;
 }
 
 .footer {

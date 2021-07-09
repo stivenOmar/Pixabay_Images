@@ -1,14 +1,14 @@
-const infoNotification = document.getElementById("infoNotification");
 const notifyFav = document.getElementById("notifyFav");
 const pagination = document.getElementById("paginacion");
 
-const showInfo = (show, id = null, element = "") => {
+const showInfo = (show, id = null, parent = "", element = "") => {
+  const parentElement = document.querySelector(`${parent}`);
   if (show) {
-    infoNotification.innerHTML = element;
+    parentElement.innerHTML = element;
   }
 
   if (!show) {
-    const elementInfo = infoNotification.querySelector(`#${id}`);
+    const elementInfo = parentElement.querySelector(`#${id}`);
     if (elementInfo) {
       elementInfo.remove();
     }
@@ -61,4 +61,93 @@ const activeMainModule = (active = "Buscador") => {
   moduleHidden.classList.replace("activeMain", "inactiveMain");
 };
 
-export { showInfo, showNotificationFavorite, showPagination, activeMainModule };
+const cardImage = (image, type = 1) => {
+  /* 1: Imagen resultado de busqueda
+    2: Imagen añadida a favoritos
+  */
+  let iconOp = `<i class="fas fa-star star" data-idimg='${image.id}' title='Añadir a favoritos'></i>`;
+  if (type === 2) {
+    iconOp = `<i class="fas fa-minus-circle circle" data-idimg='${image.id}' title='Quitar de favoritos'></i>`;
+  }
+
+  return `
+    <div class="w-1/2 md:w-1/3 lg:w-1/4 p-3 mb-4">
+                <div class="cardImg">
+                  <img
+                  class='w-full'
+                    src="${image.previewURL}"
+                    alt=""
+                  />
+                  <div class="cardInfo">
+                   <p>${image.imageHeight} x ${image.imageWidth}</p>
+                    <div class="social mb-2">
+                      <div class="iconSocial">
+                        <img
+                          src="./img/comments.png"
+                          alt=""
+                          title="Comentarios de la imagen"
+                        />
+                        <p>${image.comments}</p>
+                      </div>
+                      <div>
+                      ${iconOp}
+                      </div>
+                      <div class="iconSocial">
+                        <img
+                          src="./img/heart.png"
+                          alt=""
+                          title="Personas que les gustó la imagen"
+                        />
+                        <p>${image.likes}</p>
+                      </div>
+                    </div>
+                    <div class="btnLinks">
+                      <button class="btnViewImg">
+                        <a
+                          href="${image.largeImageURL}"
+                          target="_blank"
+                        >
+                          Ver imagen
+                        </a>
+                      </button>
+                      <a
+                        href="${image.pageURL}"
+                        target="_blank"
+                      >
+                        <img
+                          src="./img/photo.png"
+                          alt=""
+                          title="Descargar desde pixabay"
+                        />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  `;
+};
+
+const printIconOp = (id, section) => {
+  const elementIconOp = document
+    .querySelector(`${section}`)
+    .querySelector(`[data-idimg='${id}']`);
+  elementIconOp.classList.add("starActive");
+};
+
+const deleteCardImg = (idimg, section) => {
+  const elementCard = document
+    .querySelector(`${section}`)
+    .querySelector(`[data-idimg='${idimg}']`);
+  elementCard.parentElement.parentElement.parentElement.parentElement.remove();
+  showNotificationFavorite(2, "Imagen elimanada de favoritos");
+};
+
+export {
+  showInfo,
+  showNotificationFavorite,
+  showPagination,
+  activeMainModule,
+  cardImage,
+  printIconOp,
+  deleteCardImg,
+};
